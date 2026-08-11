@@ -1,6 +1,7 @@
 /* ------------------------------------------
    1. INITIAL STATE & LOCAL STORAGE
    ------------------------------------------ */
+// Link video diperbarui ke sampel video tech/nature bukan hewan
 const defaultProducts = [
     {
         id: 101,
@@ -8,7 +9,7 @@ const defaultProducts = [
         price: 12000000,
         desc: "Layar 120Hz AMOLED, RAM 12GB, Storage 512GB, Kamera 108MP.",
         image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500",
-        video: "https://www.w3schools.com/html/mov_bbb.mp4",
+        video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
         rating: 4.9,
         sold: 142,
         bestseller: true,
@@ -21,7 +22,7 @@ const defaultProducts = [
         price: 24500000,
         desc: "Processor Chip M-Pro, RAM 32GB, SSD 1TB, Retina Display.",
         image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500",
-        video: "https://www.w3schools.com/html/mov_bbb.mp4",
+        video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
         rating: 4.8,
         sold: 89,
         bestseller: true,
@@ -34,7 +35,7 @@ const defaultProducts = [
         price: 3200000,
         desc: "Sensor Detak Jantung, GPS, Tahan Air 50m, Baterai 7 Hari.",
         image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500",
-        video: "https://www.w3schools.com/html/mov_bbb.mp4",
+        video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
         rating: 4.7,
         sold: 210,
         bestseller: false,
@@ -61,7 +62,7 @@ function saveState() {
 }
 
 /* ------------------------------------------
-   2. UI TOAST & NAVIGATION
+   2. UI TOAST & NAVIGATION & MODALS
    ------------------------------------------ */
 function showToast(message) {
     const container = document.getElementById('toast-container');
@@ -85,12 +86,16 @@ function switchTab(tabName, el) {
     if(el) el.classList.add('active');
 }
 
+function openModal(id) {
+    document.getElementById(id).classList.add('active');
+}
+
 function closeModal(id) {
     document.getElementById(id).classList.remove('active');
 }
 
 /* ------------------------------------------
-   3. ONBOARDING WIZARD
+   3. ONBOARDING WIZARD & LOGOUT
    ------------------------------------------ */
 function checkOnboarding() {
     if (!state.user) {
@@ -129,13 +134,12 @@ function handleWizardStep(e) {
     }
 }
 
-function triggerLogout() {
-    if(confirm("Apakah Anda yakin ingin keluar?")) {
-        state.user = null;
-        state.wizardStep = 1;
-        localStorage.removeItem('app_user');
-        location.reload();
-    }
+function confirmLogout() {
+    state.user = null;
+    state.wizardStep = 1;
+    localStorage.removeItem('app_user');
+    localStorage.removeItem('app_products'); // Reset produk ke default saat logout
+    location.reload();
 }
 
 /* ------------------------------------------
@@ -286,7 +290,7 @@ function openDetail(id) {
     `;
 
     document.getElementById('detail-content').innerHTML = html;
-    document.getElementById('modal-detail').classList.add('active');
+    openModal('modal-detail');
 }
 
 /* ------------------------------------------
