@@ -42,7 +42,7 @@
                 </div>
                 <div class="form-group">
                     <label>URL Video Demo Produk (Video Source)</label>
-                    <input type="url" id="admin-video" class="form-control" placeholder="https://www.w3schools.com/html/mov_bbb.mp4" required>
+                    <input type="url" id="admin-video" class="form-control" placeholder="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" required>
                 </div>
                 <button type="submit" class="btn">Simpan Produk ke Database</button>
             </form>
@@ -107,7 +107,7 @@
                     <p><strong>No. HP:</strong> <span id="profile-phone">-</span></p>
                     <p><strong>Alamat Pengiriman:</strong> Jakarta, Indonesia (Default COD)</p>
                 </div>
-                <button class="btn btn-outline" onclick="triggerLogout()" style="margin-top: 12px; padding: 8px;">Logout</button>
+                <button class="btn btn-outline" onclick="openModal('modal-logout')" style="margin-top: 12px; padding: 8px;">Logout</button>
             </div>
 
             <div class="card-title">📦 Status Pesanan Anda</div>
@@ -175,6 +175,18 @@
             <button onclick="closeModal('modal-detail')" style="position: absolute; right: 12px; top: 12px; border: none; background: transparent; font-size: 18px; cursor: pointer;">✕</button>
             <div id="detail-content">
                 <!-- Injected dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 3: Custom Logout Modal (Menggantikan confirm browser) -->
+    <div class="modal-overlay" id="modal-logout">
+        <div class="modal-content" style="text-align: center;">
+            <h3 style="color: var(--primary); font-size: 16px; margin-bottom: 8px;">Konfirmasi Logout</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">Apakah Anda yakin ingin keluar dari akun ini?</p>
+            <div style="display: flex; gap: 8px;">
+                <button class="btn btn-outline" onclick="closeModal('modal-logout')">Batal</button>
+                <button class="btn btn-danger" onclick="confirmLogout()">Ya, Logout</button>
             </div>
         </div>
     </div>
