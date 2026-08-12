@@ -510,4 +510,7 @@ function updateUI() {
     renderProfileAndOrders();
 }
 
-windo
+window.addEventListener('DOMContentLoaded', () => {
+    checkOnboarding();
+    updateUI();
+});
